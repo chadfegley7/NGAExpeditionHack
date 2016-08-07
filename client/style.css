@@ -4,7 +4,7 @@
 }
 
 #map{
-	width: 100%; 
+	width: 100%;
 	height: 600px;
 }
 #frontRight{
@@ -22,7 +22,7 @@
 
 }
 .circle{
-	background-color: #4CAF50; 
+	background-color: #4CAF50;
     border: none;
     border-radius: 50%;
     height: 110px;
@@ -44,7 +44,7 @@
   10%, 90% {
     transform: translate3d(-1px, 0, 0);
   }
-  
+
   20%, 80% {
     transform: translate3d(2px, 0, 0);
   }
@@ -142,4 +142,18 @@ input[type=range]:focus::-ms-fill-upper {
 #mIndicator{
 	font-size: 1em;
 	border: none;
+}
+.mapboxgl-popup {
+  max-width: 275px;
+  font: 12px/20px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+	border: 1px solid white;
+	color: white;
+	text-align: center;
+	font-size: 12px;
+	background-color: orange;
+
+}
+button.mapboxgl-popup-close-button{
+	position: relative;
+	right: 8px;
 }
