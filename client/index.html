@@ -222,12 +222,27 @@
               "text-anchor": "top"
           }
         });
+        
       });
 
-        
-
-
-            
+    
+     $('#70').click(function (e) {
+            if(map.getLayer("points")){
+              map.removeLayer("points")
+              console.log("70")
+            }
+            if(map.getLayer("1980plots")){
+              map.removeLayer("1980plots")
+            }
+            if(map.getLayer("1990plots")){
+              map.removeLayer("1990plots")
+            }
+            if(map.getLayer("2000plots")){
+              map.removeLayer("2000plots")
+            }
+            if(map.getLayer("2010plots")){
+              map.removeLayer("2010plots")
+            }
             map.addSource("1970plots", {
               "type": "geojson",
               "data": {
@@ -252,8 +267,46 @@
                 "text-anchor": "top"
               }
               });
-               
+            var features = map.queryRenderedFeatures(e.point, {layers:['1970plots']});
+            if(!features.length){
+              return;
+            }
+          });
 
+    
+
+
+     $('#80').click(function (e) {
+            if(map.getLayer("points")){
+              map.removeLayer("points")
+            }
+            if(map.getLayer("1970plots")){
+              map.removeLayer("1970plots")
+            }
+            if(map.getLayer("1990plots")){
+              map.removeLayer("1990plots")
+            }
+            if(map.getLayer("2000plots")){
+              map.removeLayer("2000plots")
+            }
+            if(map.getLayer("2010plots")){
+              map.removeLayer("2010plots")
+            }
+            if(map.getLayer("1980plots")){
+
+        map.addLayer({
+          "id": "points",
+          "type": "symbol",
+          "source": "points",
+          "layout": {
+              "icon-image": "{icon}-15",
+              "text-field": "{title}",
+              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+              "text-offset": [0, 0.6],
+              "text-anchor": "top"
+          }
+        });
+            }
             map.addSource("1980plots", {
               "type": "geojson",
               "data": {
@@ -264,7 +317,7 @@
                   "data": "./lines.geojason"
                   }
                 }
-                })
+              })
              
 
             map.addLayer({
@@ -279,9 +332,31 @@
                 "text-anchor": "top"
               }
             });
-     
+            var features = map.queryRenderedFeatures(e.point, {layers:['1980plots']});
+            if(!features.length){
+              return;
+            }
+          });
 
-            map.addSource("1990plots", {
+
+
+     $('#90').click(function (e) {
+            if(map.getLayer("points")){
+              map.removeLayer("points")
+            }
+            if(map.getLayer("1970plots")){
+              map.removeLayer("1970plots")
+            }
+            if(map.getLayer("1980plots")){
+              map.removeLayer("1980plots")
+            }
+            if(map.getLayer("2000plots")){
+              map.removeLayer("2000plots")
+            }
+            if(map.getLayer("2010plots")){
+              map.removeLayer("2010plots")
+            }
+                        map.addSource("1990plots", {
               "type": "geojson",
               "data": {
                 "type": "FeatureCollection",
@@ -305,10 +380,31 @@
                 "text-anchor": "top"
               }
             });
- 
-        
+            var features = map.queryRenderedFeatures(e.point, {layers:['1990plots']});
+            if(!features.length){
+              return;
+            }
+          });
 
-            map.addSource("2000plots", {
+
+
+     $('#00').click(function (e) {
+            if(map.getLayer("points")){
+              map.removeLayer("points")
+            }
+            if(map.getLayer("1970plots")){
+              map.removeLayer("1970plots")
+            }
+            if(map.getLayer("1980plots")){
+              map.removeLayer("1980plots")
+            }
+            if(map.getLayer("1990plots")){
+              map.removeLayer("1990plots")
+            }
+            if(map.getLayer("2010plots")){
+              map.removeLayer("2010plots")
+            }
+                        map.addSource("2000plots", {
               "type": "geojson",
               "data": {
                 "type": "FeatureCollection",
@@ -332,8 +428,30 @@
                 "text-anchor": "top"
               }
             })
-        
+            var features = map.queryRenderedFeatures(e.point, {layers:['2000plots']});
+            if(!features.length){
+              return;
+            }
+          });
 
+
+
+     $('#10').click(function (e) {
+            if(map.getLayer("points")){
+              map.removeLayer("points")
+            }
+            if(map.getLayer("1970plots")){
+              map.removeLayer("1970plots")
+            }
+            if(map.getLayer("1980plots")){
+              map.removeLayer("1980plots")
+            }
+            if(map.getLayer("1990plots")){
+              map.removeLayer("1990plots")
+            }
+            if(map.getLayer("2000plots")){
+              map.removeLayer("2000plots")
+            }
             map.addSource("2010plots", {
               "type": "geojson",
               "data": {
@@ -357,63 +475,16 @@
                 "text-offset": [0, 0.6],
                 "text-anchor": "top"
               }
+
             });
-          });
-     
-    
-     $('#70').click(function (e) {
-            // alert('Hello world')
-            map.removeLayer("points")
-            var features = map.queryRenderedFeatures(e.point, {layers:['1970plots']});
-            if(!features.length){
-              return;
-            }
-          });
-
-    
-
-
-     $('#80').click(function (e) {
-            // alert('Hello world')
-            map.removeLayer("1970plots")
-            var features = map.queryRenderedFeatures(e.point, {layers:['1980plots']});
-            if(!features.length){
-              return;
-            }
-          });
-
-
-
-     $('#90').click(function (e) {
-            // alert('Hello world')
-            map.removeLayer("1980plots")
-            var features = map.queryRenderedFeatures(e.point, {layers:['1990plots']});
-            if(!features.length){
-              return;
-            }
-          });
-
-
-
-     $('#00').click(function (e) {
-            // alert('Hello world')
-            map.removeLayer("1990plots")
-            var features = map.queryRenderedFeatures(e.point, {layers:['2000plots']});
-            if(!features.length){
-              return;
-            }
-          });
-
-
-
-     $('#10').click(function (e) {
-            // alert('Hello world')
-            map.removeLayer("2000plots")
+          
             var features = map.queryRenderedFeatures(e.point, {layers:['2010plots']});
             if(!features.length){
               return;
             }
           });
+            });
+         
 
 
 
