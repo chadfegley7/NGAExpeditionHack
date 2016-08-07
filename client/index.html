@@ -24,7 +24,25 @@
       <h1 id = "mainTitle">Earthquake Visualizer</h1>
       <div id = "options">
         <div id = "frontLeft">
-          <p>Something about earthquakes</p>
+          <h2 id="earthquakeHeader">Earthquake 1-on-1</h2>
+          <p class="earthInfo">
+            Earthquakes are happening all over the world at a rate of 35 a day, or 12,000 - 14,000 a year.
+            So with all that activity you can only imagine the mounds of data to go through to get what you want, even just to sit there are read it would be a daunting task.
+            Why not make the information the world is providing us everyday and make it more engaging and user friendly?
+            That's our mission with Shake Quake, to make data fun.<br />
+            So you want to know some more basic information about earthquakes?<br /></p>
+            <h4 class="fourHeaders">Measurements</h4>
+            <p class="earthInfo">
+            We measure earthquakes by its Magnitude. A magnitude 6.0 earthquake releases 32 times more energy than a magnitude 5.0 and nearly 1,000 times more than a 4.0.
+            </p>
+            <h4 class="fourHeaders">Packing a Punch</h4>
+            <p class="earthInfo">
+              Going back to our 6.0 magnitude example, the amount of power that is released is approximately as much energy as 6,270 tons of TNT. A magnitude 7.0 releases 199,000 tons, and a magnitude 8.0 can do shattering damage while releasing 6.27 millions tons of TNT.
+            </p>
+            <h4 class="fourHeaders">What's the Cause?</h4>
+            <p class="earthInfo">
+              Earthquakes occur when the two sides of a fault slip suddenly against each other. The friction between plates causes stress, which is released when the blocks of crust slip sudenly along a fault plane. That releases waves of energy that travel through the ground.
+            </p>
         </div>
         <div id = "frontRight">
           <div>
@@ -73,7 +91,7 @@
     } );
 
 
-      mapboxgl.accessToken = ;
+      mapboxgl.accessToken = "";
       var map = new mapboxgl.Map({
           container: 'map',
           style: 'mapbox://styles/mapbox/satellite-streets-v9',
@@ -87,7 +105,7 @@
       var db1990 = []
       var db2000 = []
       var db2010 = []
- 
+
       $.get("https://data.humdata.org/dataset/4881d82b-ba63-4515-b748-c364f3d05b42/resource/e5722a70-d599-47b9-b7b8-17ed63107076/download/earthquakes1970-2014.json", function(res){
         console.log(res)
         var x
@@ -173,11 +191,11 @@
               "icon": "monument"
             }
           })
-        }        
+        }
 
 
           datex = ""
-          db.push( 
+          db.push(
          {
           "type": "Feature",
           "geometry": {
@@ -222,10 +240,10 @@
               "text-anchor": "top"
           }
         });
-        
+
       });
 
-    
+
      $('#70').click(function (e) {
             if(map.getLayer("points")){
               map.removeLayer("points")
@@ -256,7 +274,7 @@
             });
 
             map.addLayer({
-            "id": "1970plots", 
+            "id": "1970plots",
             "type": "symbol",
             "source": "1970plots",
             "layout": {
@@ -273,7 +291,7 @@
             }
           });
 
-    
+
 
 
      $('#80').click(function (e) {
@@ -318,10 +336,10 @@
                   }
                 }
               })
-             
+
 
             map.addLayer({
-            "id": "1980plots", 
+            "id": "1980plots",
             "type": "symbol",
             "source": "1980plots",
             "layout": {
@@ -369,7 +387,7 @@
               });
 
             map.addLayer({
-            "id": "1990plots", 
+            "id": "1990plots",
             "type": "symbol",
             "source": "1990plots",
             "layout": {
@@ -417,7 +435,7 @@
               });
 
             map.addLayer({
-            "id": "2000plots", 
+            "id": "2000plots",
             "type": "symbol",
             "source": "2000plots",
             "layout": {
@@ -460,12 +478,12 @@
                 "geojason-lines":{
                   "type": "geojason",
                   "data": "./lines.geojason"
-                 } 
+                 }
                 }
               });
 
             map.addLayer({
-            "id": "2010plots", 
+            "id": "2010plots",
             "type": "symbol",
             "source": "2010plots",
             "layout": {
@@ -477,14 +495,14 @@
               }
 
             });
-          
+
             var features = map.queryRenderedFeatures(e.point, {layers:['2010plots']});
             if(!features.length){
               return;
             }
           });
             });
-         
+
 
 
 
