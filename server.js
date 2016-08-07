@@ -2,6 +2,7 @@ var express = require("express");
 var path = require("path");
 var bodyParser = require("body-parser");
 var topojson = require("topojson");
+// var config = require("/config_mapbox.js");
 var app = express();
 
 app.use(express.static(path.join(__dirname, "./client")));
