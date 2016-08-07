@@ -24,7 +24,7 @@
       <h1 id = "mainTitle">Earthquake Visualizer</h1>
       <div id = "options">
         <div id = "frontLeft">
-          <h2 id="earthquakeHeader">Earthquake 1-on-1</h2>
+          <h2 class="earthquakeHeader">Earthquake 1-on-1</h2>
           <p class="earthInfo">
             Earthquakes are happening all over the world at a rate of 35 a day, or 12,000 - 14,000 a year.
             So with all that activity you can only imagine the mounds of data to go through to get what you want, even just to sit there are read it would be a daunting task.
@@ -45,21 +45,7 @@
             </p>
         </div>
         <div id = "frontRight">
-          <div>
-
-            <p>Select Magnitude:</p>
-            <input id= "mIndicator" type="text" value="" disabled>
-
-            <input type="range" name = "magn" step="0.1" min="2.0" max="10.0">
-
-            <label for="magni">Select Magnitude:</label>
-            <input type="text" id="magni" readonly>
-            <br>
-            <div id="slider-range"></div>
-
-
-          </div>
-
+          <div id="decSec">
             <p>Select Decade:</p>
               <button class="circle" id="70">1970</button>
               <button class="circle" id="80">1980</button>
@@ -67,8 +53,15 @@
               <button class="circle" id="00">2000</button>
               <button class="circle" id="10">2010</button>
           </div>
-        </div>
+          <div id="mgSec">
+            <label for="magni">Select Magnitude:</label>
+            <input type="text" id="magni" readonly>
+            <br>
+            <div id="slider-range"></div>
 
+
+          </div>
+        </div>
       </div>
     </div>
 
@@ -91,7 +84,7 @@
     } );
 
 
-      mapboxgl.accessToken = ;
+      mapboxgl.accessToken ="" ;
       var map = new mapboxgl.Map({
           container: 'map',
           style: 'mapbox://styles/mapbox/satellite-streets-v9',
@@ -135,7 +128,7 @@
                     "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
                     "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
 
-                    "icon": "monument"
+                    "icon": "triangle"
                   }
                 })
               }
@@ -155,7 +148,7 @@
                     "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
                     "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
 
-                    "icon": "monument"
+                    "icon": "triangle"
                   }
                 })
           }
@@ -175,7 +168,7 @@
                     "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
                     "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
 
-                    "icon": "monument"
+                    "icon": "triangle"
                   }
                 })
             }
@@ -196,7 +189,7 @@
                     "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
                     "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
 
-                    "icon": "monument"
+                    "icon": "triangle"
                   }
                 })
             }
@@ -217,7 +210,7 @@
                     "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
                     "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
 
-                    "icon": "monument"
+                    "icon": "triangle"
                   }
                 })
             }        
@@ -237,7 +230,7 @@
                 "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
                 "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
 
-                "icon": "monument"
+                "icon": "triangle"
 
             }
           })

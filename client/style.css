@@ -1,3 +1,6 @@
+*{
+  color: #FFF;
+}
 #info{
 	font-family: "Arial", sans-serif;
 	font-size: 2em;
@@ -20,12 +23,24 @@
 	vertical-align: top;
 	display: inline-block;
 	width: 50%;
-
+}
+#magSec{
+  margin-top: 20px;
+}
+#decSec{
+  margin-bottom: 20px;
 }
 #magni{
   border: none;
   font-size: 0.7em;
   display: inline;
+  color:#000000;
+}
+#mainTitle:hover{
+  animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
+  transform: translate3d(0, 0, 0);
+  backface-visibility: hidden;
+  perspective: 1000px;
 }
 .circle{
 	background-color: #4CAF50;
@@ -34,11 +49,12 @@
     height: 110px;
     width: 110px;
     color: white;
-	text-align: center;
+    text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 20px;
 }
+
 .circle:hover {
   animation: shake 0.82s cubic-bezier(.36,.07,.19,.97) both;
   transform: translate3d(0, 0, 0);
@@ -63,6 +79,7 @@
     transform: translate3d(4px, 0, 0);
   }
 }
+
 /*CSS for the Range slider*/
 /*708090
 4CAF50*/
@@ -73,7 +90,7 @@
   background-color: #708090;
 }
 #slider-range{
-  margin-top: 10px;
+  margin-top: 20px;
 }
 
 #mIndicator{
@@ -98,11 +115,11 @@ button.mapboxgl-popup-close-button{
 	font-size: 16px;
 	color: white;
 }
-#earthquakeHeader{
+/*#earthquakeHeader{
 	position: relative;
 	margin-left: 100px;
 	color: white;
-}
+}*/
 body{
 	background-color: black;
 }
