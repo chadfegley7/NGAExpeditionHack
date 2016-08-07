@@ -24,15 +24,28 @@
           <p>Something about earthquakes</p>
         </div>
         <div id = "frontRight">
-          <p>Select a range</p>
-          <button>Years</button>
-          <button>Magnitude</button>
+          <div>
+            <p>Select Magnitude:</p>  
+            <input id= "mIndicator" type="text" value="" disabled>
+
+            <input type="range" name = "magn" step="0.1" min="2.0" max="10.0">
+          </div>
+          <div>
+            <p>Select Decade:</p>
+              <button class="circle" id="70">1970</button>
+              <button class="circle" id="80">1980</button>
+              <button class="circle" id="90">1990</button>
+              <button class="circle" id="00">2000</button>
+              <button class="circle" id="10">2010</button>
+          </div>
         </div>
+
       </div>
     </div>
 
     <script>
-      mapboxgl.accessToken = ;
+    
+      mapboxgl.accessToken = "";
       var map = new mapboxgl.Map({
           container: 'map',
           style: 'mapbox://styles/mapbox/satellite-streets-v9',
@@ -45,20 +58,19 @@
         for(var i = 0; i<res.features.length; i++){
           db.push( 
          {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": res.features[i].geometry.coordinates
-                    },
-                    "properties": {
-                        "title": "Mapbox DC",
-                        "icon": "monument"
-                    }
-                })
+          "type": "Feature",
+          "geometry": {
+              "type": "Point",
+              "coordinates": res.features[i].geometry.coordinates
+          },
+          "properties": {
+              "title": "Mapbox DC",
+              "icon": "monument"
+          }
+        })
       }
-          console.log(db)
+      console.log(db)
     
-    // console.log(coor)
 
       var nav = new mapboxgl.Navigation({position: 'top-left'}); // position is optional
       map.addControl(nav);
@@ -66,28 +78,29 @@
 
       map.on('load', function () {
         map.addSource("points", {
-            "type": "geojson",
-            "data": {
-                "type": "FeatureCollection",
-                "features": db
-            }
+          "type": "geojson",
+          "data": {
+              "type": "FeatureCollection",
+              "features": db
+          }
         });
 
         map.addLayer({
-            "id": "points",
-            "type": "symbol",
-            "source": "points",
-            "layout": {
-                "icon-image": "{icon}-15",
-                "text-field": "{title}",
-                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                "text-offset": [0, 0.6],
-                "text-anchor": "top"
-            }
+          "id": "points",
+          "type": "symbol",
+          "source": "points",
+          "layout": {
+              "icon-image": "{icon}-15",
+              "text-field": "{title}",
+              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+              "text-color":"red",
+              "text-offset": [0, 0.6],
+              "text-anchor": "top"
+          }
         });
+      });
     });
-});
-      </script>
+    </script>
 
     </div>
 
