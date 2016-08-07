@@ -9,6 +9,9 @@
     <script type="text/javascript" src="./js/controller/earthquakesController.js"></script>
     <!-- <script type="text/javascript" src="./js/controller/gridController.js"></script> -->
     <script type="text/javascript" src="./js/model/earthquakeFactory.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
     <!-- Stylesheets -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet" />
@@ -25,12 +28,20 @@
         </div>
         <div id = "frontRight">
           <div>
-            <p>Select Magnitude:</p>  
+
+            <p>Select Magnitude:</p>
             <input id= "mIndicator" type="text" value="" disabled>
 
             <input type="range" name = "magn" step="0.1" min="2.0" max="10.0">
+
+            <label for="magni">Select Magnitude:</label>
+            <input type="text" id="magni" readonly>
+            <br>
+            <div id="slider-range"></div>
+
+
           </div>
-          <div>
+
             <p>Select Decade:</p>
               <button class="circle" id="70">1970</button>
               <button class="circle" id="80">1980</button>
@@ -44,7 +55,24 @@
     </div>
 
     <script>
-    
+
+
+    $( function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 1.0,
+      max: 10.0,
+      step: 0.1,
+      values: [ 1.0, 10.0 ],
+      slide: function( event, ui ) {
+        $("#magni").val(ui.values[0] + " - " + ui.values[1] );
+      }
+    })
+    $("#magni").val($("#slider-range").slider( "values", 0 ) +
+      " - " + $("#slider-range").slider("values", 1) );
+    } );
+
+
       mapboxgl.accessToken = "pk.eyJ1IjoiY2hhZGZlZ2xleTciLCJhIjoiY2lyanRkMHZ0MDAyNmZmbThxdTl0czlhciJ9.gypdwh5x658ca5d4z7so1A";
       var map = new mapboxgl.Map({
           container: 'map',
@@ -59,31 +87,14 @@
       var db1990 = []
       var db2000 = []
       var db2010 = []
-
-    //   $("#70").click(function(){
-    //       console.log(db1970)
-    //   //     if(res.features[i].geometry.)
-    //   //     for(var i = 0; i<9; i++){
-    //   //     db.push( 
-    //   //    {
-    //   //     "type": "Feature",
-    //   //     "geometry": {
-    //   //         "type": "Point",
-    //   //         "coordinates": res.features[i].properties.DateTime
-    //   //     },
-    //   //     "properties": {
-    //   //         "title": "Mapbox DC",
-    //   //         "icon": "monument"
-    //   //     }
-    //   //   });
-    //   // }
-    // })  
+ 
       $.get("https://data.humdata.org/dataset/4881d82b-ba63-4515-b748-c364f3d05b42/resource/e5722a70-d599-47b9-b7b8-17ed63107076/download/earthquakes1970-2014.json", function(res){
         console.log(res)
         var x
         var datex = ""
         var datexarray = []
         for(var i = 0; i<res.features.length; i++){
+
           for(var z = 0; z<4; z++){
             x=res.features[i].properties.DateTime[z]
             y = x.toString()
@@ -105,6 +116,66 @@
             }
           })
         }
+          if(datex < 1990 && datex > 1979){
+            // console.log("after 2000")
+           db1980.push({
+          "type": "Feature",
+          "geometry": {
+              "type": "Point",
+              "coordinates": res.features[i].geometry.coordinates
+            },
+          "properties": {
+              "title": "Mapbox DC",
+              "icon": "monument"
+            }
+          })
+        }
+          if(datex < 2000 && datex > 1989){
+            // console.log("after 2000")
+           db1990.push({
+          "type": "Feature",
+          "geometry": {
+              "type": "Point",
+              "coordinates": res.features[i].geometry.coordinates
+            },
+          "properties": {
+              "title": "Mapbox DC",
+              "icon": "monument"
+            }
+          })
+        }
+
+          if(datex > 1999 && datex < 2001){
+            // console.log("after 2000")
+           db2000.push({
+          "type": "Feature",
+          "geometry": {
+              "type": "Point",
+              "coordinates": res.features[i].geometry.coordinates
+            },
+          "properties": {
+              "title": "Mapbox DC",
+              "icon": "monument"
+            }
+          })
+        }
+
+          if(datex > 2000){
+            // console.log("after 2000")
+           db2010.push({
+          "type": "Feature",
+          "geometry": {
+              "type": "Point",
+              "coordinates": res.features[i].geometry.coordinates
+            },
+          "properties": {
+              "title": "Mapbox DC",
+              "icon": "monument"
+            }
+          })
+        }        
+
+
           datex = ""
           db.push( 
          {
@@ -114,11 +185,18 @@
               "coordinates": res.features[i].geometry.coordinates
           },
           "properties": {
-              "title": "Mapbox DC",
+              "title": res.features[i].properties.Magnitude,
+
+              "icon": "triangle",
+              "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+              "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
+
               "icon": "monument"
+
           }
         })
       }
+
 
       var nav = new mapboxgl.Navigation({position: 'top-left'}); // position is optional
       map.addControl(nav);
@@ -146,18 +224,8 @@
         });
       });
 
+        
 
-            // "layers":[
-            //   {
-            //   "id":"1970plots",
-            //   "source": "mapbox-streets",
-            //   "source-layer": "water",
-            //   "type": "fill",
-            //   "paint": {
-            //     "fill-color": "#00ffff"
-            //     }
-            //   }
-            // ]
 
             
             map.addSource("1970plots", {
@@ -169,8 +237,8 @@
                   "type": "geojason",
                   "data": "./lines.geojason"
                   }
-                }
-              });
+              }
+            });
 
             map.addLayer({
             "id": "1970plots", 
@@ -183,9 +251,115 @@
                 "text-offset": [0, 0.6],
                 "text-anchor": "top"
               }
-            });
-         })
+              });
+               
 
+            map.addSource("1980plots", {
+              "type": "geojson",
+              "data": {
+                "type": "FeatureCollection",
+                "features": db1980,
+                "geojason-lines":{
+                  "type": "geojason",
+                  "data": "./lines.geojason"
+                  }
+                }
+                })
+             
+
+            map.addLayer({
+            "id": "1980plots", 
+            "type": "symbol",
+            "source": "1980plots",
+            "layout": {
+                "icon-image": "{icon}-15",
+                "text-field": "{title}",
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+              }
+            });
+     
+
+            map.addSource("1990plots", {
+              "type": "geojson",
+              "data": {
+                "type": "FeatureCollection",
+                "features": db1990,
+                "geojason-lines":{
+                  "type": "geojason",
+                  "data": "./lines.geojason"
+                  }
+                }
+              });
+
+            map.addLayer({
+            "id": "1990plots", 
+            "type": "symbol",
+            "source": "1990plots",
+            "layout": {
+                "icon-image": "{icon}-15",
+                "text-field": "{title}",
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+              }
+            });
+ 
+        
+
+            map.addSource("2000plots", {
+              "type": "geojson",
+              "data": {
+                "type": "FeatureCollection",
+                "features": db2000,
+                "geojason-lines":{
+                  "type": "geojason",
+                  "data": "./lines.geojason"
+                  }
+                }
+              });
+
+            map.addLayer({
+            "id": "2000plots", 
+            "type": "symbol",
+            "source": "2000plots",
+            "layout": {
+                "icon-image": "{icon}-15",
+                "text-field": "{title}",
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+              }
+            })
+        
+
+            map.addSource("2010plots", {
+              "type": "geojson",
+              "data": {
+                "type": "FeatureCollection",
+                "features": db2010,
+                "geojason-lines":{
+                  "type": "geojason",
+                  "data": "./lines.geojason"
+                 } 
+                }
+              });
+
+            map.addLayer({
+            "id": "2010plots", 
+            "type": "symbol",
+            "source": "2010plots",
+            "layout": {
+                "icon-image": "{icon}-15",
+                "text-field": "{title}",
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+              }
+            });
+          });
+     
     
      $('#70').click(function (e) {
             // alert('Hello world')
@@ -195,6 +369,80 @@
               return;
             }
           });
+
+    
+
+
+     $('#80').click(function (e) {
+            // alert('Hello world')
+            map.removeLayer("1970plots")
+            var features = map.queryRenderedFeatures(e.point, {layers:['1980plots']});
+            if(!features.length){
+              return;
+            }
+          });
+
+
+
+     $('#90').click(function (e) {
+            // alert('Hello world')
+            map.removeLayer("1980plots")
+            var features = map.queryRenderedFeatures(e.point, {layers:['1990plots']});
+            if(!features.length){
+              return;
+            }
+          });
+
+
+
+     $('#00').click(function (e) {
+            // alert('Hello world')
+            map.removeLayer("1990plots")
+            var features = map.queryRenderedFeatures(e.point, {layers:['2000plots']});
+            if(!features.length){
+              return;
+            }
+          });
+
+
+
+     $('#10').click(function (e) {
+            // alert('Hello world')
+            map.removeLayer("2000plots")
+            var features = map.queryRenderedFeatures(e.point, {layers:['2010plots']});
+            if(!features.length){
+              return;
+            }
+          });
+
+
+
+    map.on('click', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
+
+    if (!features.length) {
+        return;
+    }
+
+    var feature = features[0];
+
+    // Populate the popup and set its coordinates
+    // based on the feature found.
+    var popup = new mapboxgl.Popup()
+        .setLngLat(feature.geometry.coordinates)
+        .setHTML(feature.properties.description)
+        .addTo(map);
+    });
+
+    // Use the same approach as above to indicate that the symbols are clickable
+    // by changing the cursor style to 'pointer'.
+    map.on('mousemove', function (e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+        map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+    });
+
+
+
     </script>
 
     </div>
