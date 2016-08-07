@@ -40,14 +40,25 @@
           hash: true
       });
 
-    $.get("https://data.humdata.org/dataset/4881d82b-ba63-4515-b748-c364f3d05b42/resource/e5722a70-d599-47b9-b7b8-17ed63107076/download/earthquakes1970-2014.json", function(res){
+      var db = []
+      $.get("https://data.humdata.org/dataset/4881d82b-ba63-4515-b748-c364f3d05b42/resource/e5722a70-d599-47b9-b7b8-17ed63107076/download/earthquakes1970-2014.json", function(res){
         for(var i = 0; i<res.features.length; i++){
-          var coor = (res.features[i].geometry.coordinates)
-
+          db.push( 
+         {
+                    "type": "Feature",
+                    "geometry": {
+                        "type": "Point",
+                        "coordinates": res.features[i].geometry.coordinates
+                    },
+                    "properties": {
+                        "title": "Mapbox DC",
+                        "icon": "monument"
+                    }
+                })
       }
-
+          console.log(db)
     
-    console.log(coor)
+    // console.log(coor)
 
       var nav = new mapboxgl.Navigation({position: 'top-left'}); // position is optional
       map.addControl(nav);
@@ -58,27 +69,7 @@
             "type": "geojson",
             "data": {
                 "type": "FeatureCollection",
-                "features": [{
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [-122.414, 37.776]
-                    },
-                    "properties": {
-                        "title": "Mapbox DC",
-                        "icon": "monument"
-                    }
-                }, {
-                    "type": "Feature",
-                    "geometry": {
-                        "type": "Point",
-                        "coordinates": [-122.414, 37.776]
-                    },
-                    "properties": {
-                        "title": "Mapbox SF",
-                        "icon": "harbor"
-                    }
-                }]
+                "features": db
             }
         });
 
