@@ -7,6 +7,7 @@
 	width: 100%; 
 	height: 600px;
 }
+
 #frontRight{
 	vertical-align: top;
 	display: inline-block;
@@ -20,6 +21,11 @@
 	display: inline-block;
 	width: 50%;
 
+}
+#magni{
+  border: none;
+  font-size: 0.7em;
+  display: inline;
 }
 .circle{
 	background-color: #4CAF50; 
@@ -58,87 +64,18 @@
   }
 }
 /*CSS for the Range slider*/
-input[type=range] {
-  -webkit-appearance: none;
-  margin: 18px 0;
-  width: 100%;
+/*708090
+4CAF50*/
+.ui-widget-content {
+  background-color: #FFFFFF;
 }
-input[type=range]:focus {
-  outline: none;
+.ui-widget-header {
+  background-color: #708090;
 }
-input[type=range]::-webkit-slider-runnable-track {
-  width: 100%;
-  height: 8.4px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: #4CAF50;
-  border-radius: 1.3px;
-  border: 0.2px solid #4CAF50;
+#slider-range{
+  margin-top: 10px;
 }
-input[type=range]::-webkit-slider-thumb {
-  border: 1px solid #708090;
-  height: 36px;
-  width: 16px;
-  border-radius: 3px;
-  background: #708090;
-  cursor: pointer;
-  -webkit-appearance: none;
-  margin-top: -14px;
-}
-input[type=range]:focus::-webkit-slider-runnable-track {
-  background: #4CAF50;
-}
-input[type=range]::-moz-range-track {
-  width: 100%;
-  height: 8.4px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: #4CAF50;
-  border-radius: 1.3px;
-  border: 0.2px solid #4CAF50;
-}
-input[type=range]::-moz-range-thumb {
-  border: 1px solid #708090;
-  height: 36px;
-  width: 16px;
-  border-radius: 3px;
-  background: #708090;
-  cursor: pointer;
-}
-input[type=range]::-ms-track {
-  width: 100%;
-  height: 8.4px;
-  cursor: pointer;
-  animate: 0.2s;
-  background: transparent;
-  border-color: transparent;
-  border-width: 16px 0;
-  color: transparent;
-}
-input[type=range]::-ms-fill-lower {
-  background: #4CAF50;
-  border: 0.2px solid #4CAF50;
-  border-radius: 2.6px;
-}
-input[type=range]::-ms-fill-upper {
-  background: #4CAF50;
-  border: 0.2px solid #4CAF50;
-  border-radius: 2.6px;
-}
-input[type=range]::-ms-thumb {
-  border: 1px solid #708090;
-  height: 36px;
-  width: 16px;
-  border-radius: 3px;
-  background: #708090;
-  cursor: pointer;
-}
-input[type=range]:focus::-ms-fill-lower {
-  background: #4CAF50;
-}
-input[type=range]:focus::-ms-fill-upper {
-  background: #4CAF50;
-}
+
 #mIndicator{
 	font-size: 1em;
 	border: none;
