@@ -103,105 +103,131 @@
           datexarray.push(datex)
           parseInt(datex)
           if(datex < 1980){
-            // console.log("after 2000")
-           db1970.push({
-          "type": "Feature",
-          "geometry": {
-              "type": "Point",
-              "coordinates": res.features[i].geometry.coordinates
-            },
-          "properties": {
-              "title": "Mapbox DC",
-              "icon": "monument"
-            }
-          })
-        }
+             db1970.push( 
+                {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": res.features[i].geometry.coordinates
+                  },
+                "properties": {
+                    "title": res.features[i].properties.Magnitude,
+
+                    "icon": "triangle",
+                    "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+                    "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
+
+                    "icon": "monument"
+                  }
+                })
+              }
           if(datex < 1990 && datex > 1979){
             // console.log("after 2000")
-           db1980.push({
-          "type": "Feature",
-          "geometry": {
-              "type": "Point",
-              "coordinates": res.features[i].geometry.coordinates
-            },
-          "properties": {
-              "title": "Mapbox DC",
-              "icon": "monument"
-            }
-          })
-        }
+           db1980.push( 
+                {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": res.features[i].geometry.coordinates
+                  },
+                "properties": {
+                    "title": res.features[i].properties.Magnitude,
+
+                    "icon": "triangle",
+                    "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+                    "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
+
+                    "icon": "monument"
+                  }
+                })
+          }
           if(datex < 2000 && datex > 1989){
             // console.log("after 2000")
-           db1990.push({
-          "type": "Feature",
-          "geometry": {
-              "type": "Point",
-              "coordinates": res.features[i].geometry.coordinates
-            },
-          "properties": {
-              "title": "Mapbox DC",
-              "icon": "monument"
+           db1990.push( 
+                {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": res.features[i].geometry.coordinates
+                  },
+                "properties": {
+                    "title": res.features[i].properties.Magnitude,
+
+                    "icon": "triangle",
+                    "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+                    "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
+
+                    "icon": "monument"
+                  }
+                })
             }
-          })
-        }
 
           if(datex > 1999 && datex < 2001){
             // console.log("after 2000")
-           db2000.push({
-          "type": "Feature",
-          "geometry": {
-              "type": "Point",
-              "coordinates": res.features[i].geometry.coordinates
-            },
-          "properties": {
-              "title": "Mapbox DC",
-              "icon": "monument"
+           db2000.push( 
+                {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": res.features[i].geometry.coordinates
+                  },
+                "properties": {
+                    "title": res.features[i].properties.Magnitude,
+
+                    "icon": "triangle",
+                    "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+                    "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
+
+                    "icon": "monument"
+                  }
+                })
             }
-          })
-        }
 
           if(datex > 2000){
             // console.log("after 2000")
-           db2010.push({
-          "type": "Feature",
-          "geometry": {
-              "type": "Point",
-              "coordinates": res.features[i].geometry.coordinates
-            },
-          "properties": {
-              "title": "Mapbox DC",
-              "icon": "monument"
-            }
-          })
-        }        
+           db2010.push( 
+                {
+                "type": "Feature",
+                "geometry": {
+                    "type": "Point",
+                    "coordinates": res.features[i].geometry.coordinates
+                  },
+                "properties": {
+                    "title": res.features[i].properties.Magnitude,
 
+                    "icon": "triangle",
+                    "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+                    "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
 
+                    "icon": "monument"
+                  }
+                })
+            }        
           datex = ""
           db.push( 
-         {
-          "type": "Feature",
-          "geometry": {
-              "type": "Point",
-              "coordinates": res.features[i].geometry.coordinates
-          },
-          "properties": {
-              "title": res.features[i].properties.Magnitude,
+           {
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": res.features[i].geometry.coordinates
+            },
+            "properties": {
+                "title": res.features[i].properties.Magnitude,
 
-              "icon": "triangle",
-              "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
-              "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
+                "icon": "triangle",
+                "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+                "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
 
-              "icon": "monument"
+                "icon": "monument"
 
-          }
-        })
-      }
+            }
+          })
+        }
+      })
 
 
       var nav = new mapboxgl.Navigation({position: 'top-left'}); // position is optional
       map.addControl(nav);
-
-
       map.on('load', function () {
         map.addSource("points", {
           "type": "geojson",
@@ -266,11 +292,34 @@
                 "text-offset": [0, 0.6],
                 "text-anchor": "top"
               }
-              });
+            });
             var features = map.queryRenderedFeatures(e.point, {layers:['1970plots']});
             if(!features.length){
               return;
             }
+               map.on('click', function (e) {
+                var features = map.queryRenderedFeatures(e.point, { layers: ['1970plots'] });
+
+                if (!features.length) {
+                    return;
+                }
+
+                var feature = features[0];
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                var popup = new mapboxgl.Popup()
+                    .setLngLat(feature.geometry.coordinates)
+                    .setHTML(feature.properties.description)
+                    .addTo(map);
+                });
+
+                // Use the same approach as above to indicate that the symbols are clickable
+                // by changing the cursor style to 'pointer'.
+                map.on('mousemove', function (e) {
+                    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+                    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+                });
           });
 
     
@@ -336,6 +385,29 @@
             if(!features.length){
               return;
             }
+               map.on('click', function (e) {
+                var features = map.queryRenderedFeatures(e.point, { layers: ['1980plots'] });
+
+                if (!features.length) {
+                    return;
+                }
+
+                var feature = features[0];
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                var popup = new mapboxgl.Popup()
+                    .setLngLat(feature.geometry.coordinates)
+                    .setHTML(feature.properties.description)
+                    .addTo(map);
+                });
+
+                // Use the same approach as above to indicate that the symbols are clickable
+                // by changing the cursor style to 'pointer'.
+                map.on('mousemove', function (e) {
+                    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+                    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+                });            
           });
 
 
@@ -356,7 +428,7 @@
             if(map.getLayer("2010plots")){
               map.removeLayer("2010plots")
             }
-                        map.addSource("1990plots", {
+              map.addSource("1990plots", {
               "type": "geojson",
               "data": {
                 "type": "FeatureCollection",
@@ -384,6 +456,29 @@
             if(!features.length){
               return;
             }
+               map.on('click', function (e) {
+                var features = map.queryRenderedFeatures(e.point, { layers: ['1990plots'] });
+
+                if (!features.length) {
+                    return;
+                }
+
+                var feature = features[0];
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                var popup = new mapboxgl.Popup()
+                    .setLngLat(feature.geometry.coordinates)
+                    .setHTML(feature.properties.description)
+                    .addTo(map);
+                });
+
+                // Use the same approach as above to indicate that the symbols are clickable
+                // by changing the cursor style to 'pointer'.
+                map.on('mousemove', function (e) {
+                    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+                    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+                });              
           });
 
 
@@ -404,7 +499,7 @@
             if(map.getLayer("2010plots")){
               map.removeLayer("2010plots")
             }
-                        map.addSource("2000plots", {
+              map.addSource("2000plots", {
               "type": "geojson",
               "data": {
                 "type": "FeatureCollection",
@@ -432,6 +527,29 @@
             if(!features.length){
               return;
             }
+               map.on('click', function (e) {
+                var features = map.queryRenderedFeatures(e.point, { layers: ['2000plots'] });
+
+                if (!features.length) {
+                    return;
+                }
+
+                var feature = features[0];
+
+                // Populate the popup and set its coordinates
+                // based on the feature found.
+                var popup = new mapboxgl.Popup()
+                    .setLngLat(feature.geometry.coordinates)
+                    .setHTML(feature.properties.description)
+                    .addTo(map);
+                });
+
+                // Use the same approach as above to indicate that the symbols are clickable
+                // by changing the cursor style to 'pointer'.
+                map.on('mousemove', function (e) {
+                    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+                    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+                });            
           });
 
 
@@ -482,8 +600,25 @@
             if(!features.length){
               return;
             }
+               map.on('click', function (e) {
+                var features = map.queryRenderedFeatures(e.point, { layers: ['2010plots'] });
+                if (!features.length) {
+                    return;
+                }
+                var feature = features[0];
+                var popup = new mapboxgl.Popup()
+                    .setLngLat(feature.geometry.coordinates)
+                    .setHTML(feature.properties.description)
+                    .addTo(map);
+                });
+                map.on('mousemove', function (e) {
+                    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+                    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+                });            
+
+
           });
-            });
+      
          
 
 
