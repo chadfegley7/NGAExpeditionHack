@@ -9,6 +9,9 @@
     <script type="text/javascript" src="./js/controller/earthquakesController.js"></script>
     <!-- <script type="text/javascript" src="./js/controller/gridController.js"></script> -->
     <script type="text/javascript" src="./js/model/earthquakeFactory.js"></script>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
 
     <!-- Stylesheets -->
     <link href="https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet" />
@@ -25,12 +28,20 @@
         </div>
         <div id = "frontRight">
           <div>
+
             <p>Select Magnitude:</p>
             <input id= "mIndicator" type="text" value="" disabled>
 
             <input type="range" name = "magn" step="0.1" min="2.0" max="10.0">
+
+            <label for="magni">Select Magnitude:</label>
+            <input type="text" id="magni" readonly>
+            <br>
+            <div id="slider-range"></div>
+
+
           </div>
-          <div>
+
             <p>Select Decade:</p>
               <button class="circle" id="70">1970</button>
               <button class="circle" id="80">1980</button>
@@ -44,6 +55,21 @@
     </div>
 
     <script>
+
+    $( function() {
+    $( "#slider-range" ).slider({
+      range: true,
+      min: 1.0,
+      max: 10.0,
+      step: 0.1,
+      values: [ 1.0, 10.0 ],
+      slide: function( event, ui ) {
+        $("#magni").val(ui.values[0] + " - " + ui.values[1] );
+      }
+    })
+    $("#magni").val($("#slider-range").slider( "values", 0 ) +
+      " - " + $("#slider-range").slider("values", 1) );
+    } );
 
       mapboxgl.accessToken = "pk.eyJ1IjoiY2hhZGZlZ2xleTciLCJhIjoiY2lyanRkMHZ0MDAyNmZmbThxdTl0czlhciJ9.gypdwh5x658ca5d4z7so1A";
       var map = new mapboxgl.Map({
@@ -65,9 +91,13 @@
           },
           "properties": {
               "title": res.features[i].properties.Magnitude,
+
               "icon": "triangle",
               "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
-              "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude
+              "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
+
+              "icon": "monument"
+
           }
         })
       }
