@@ -1,0 +1,35 @@
+#info{
+	font-family: "Arial", sans-serif;
+	font-size: 2em;
+}
+
+#map{
+	width: 100%; 
+	height: 600px;
+}
+#frontRight{
+	vertical-align: top;
+	display: inline-block;
+	width: 45%;
+}
+#mainTitle{
+	text-align: center;
+}
+#frontLeft{
+	vertical-align: top;
+	display: inline-block;
+	width: 50%;
+
+}
+button{
+	background-color: #4CAF50; 
+    border: none;
+    border-radius: 50%;
+    height: 120px;
+    width: 120px;
+    color: white;
+	text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+}
