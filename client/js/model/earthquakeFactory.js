@@ -12,7 +12,7 @@ myApp.factory('earthquakeFactory', function($http){
   factory.quakeDataApi = function(callback){
     $http.get("https://data.humdata.org/dataset/4881d82b-ba63-4515-b748-c364f3d05b42/resource/e5722a70-d599-47b9-b7b8-17ed63107076/download/earthquakes1970-2014.json").success(function(output){
       callback(output);
-      console.log(output);
+      console.log(output.features);
       // completeQuakes = output
     })
   }

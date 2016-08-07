@@ -121,10 +121,10 @@
 
   </head>
   <body>
-    <div id='map' style='width: 100%; height: 600px;' ng-controller="earthquakesController"></div>
+    <div id='map' style='width: 100%; height: 600px;' ng-controller="earthquakesController">
       <script>
       // var config = require("config_mapbox.js");
-      mapboxgl.accessToken = 'pk.eyJ1IjoiY2hhZGZlZ2xleTciLCJhIjoiY2lyanRkMHZ0MDAyNmZmbThxdTl0czlhciJ9.gypdwh5x658ca5d4z7so1A';
+      mapboxgl.accessToken = ;
       var map = new mapboxgl.Map({
           container: 'map',
           style: 'mapbox://styles/mapbox/satellite-streets-v9',
@@ -136,6 +136,6 @@
       map.addControl(nav);
       // map.addControl(new mapboxgl.Geolocate({position: 'top-left'}));
       </script>
-
+    </div>
   </body>
 </html>
