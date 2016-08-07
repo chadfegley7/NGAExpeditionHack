@@ -45,7 +45,7 @@
 
     <script>
     
-      mapboxgl.accessToken = "";
+      mapboxgl.accessToken = "pk.eyJ1IjoiY2hhZGZlZ2xleTciLCJhIjoiY2lyanRkMHZ0MDAyNmZmbThxdTl0czlhciJ9.gypdwh5x658ca5d4z7so1A";
       var map = new mapboxgl.Map({
           container: 'map',
           style: 'mapbox://styles/mapbox/satellite-streets-v9',
@@ -54,8 +54,58 @@
       });
 
       var db = []
+      var db1970 = []
+      var db1980 = []
+      var db1990 = []
+      var db2000 = []
+      var db2010 = []
+
+    //   $("#70").click(function(){
+    //       console.log(db1970)
+    //   //     if(res.features[i].geometry.)
+    //   //     for(var i = 0; i<9; i++){
+    //   //     db.push( 
+    //   //    {
+    //   //     "type": "Feature",
+    //   //     "geometry": {
+    //   //         "type": "Point",
+    //   //         "coordinates": res.features[i].properties.DateTime
+    //   //     },
+    //   //     "properties": {
+    //   //         "title": "Mapbox DC",
+    //   //         "icon": "monument"
+    //   //     }
+    //   //   });
+    //   // }
+    // })  
       $.get("https://data.humdata.org/dataset/4881d82b-ba63-4515-b748-c364f3d05b42/resource/e5722a70-d599-47b9-b7b8-17ed63107076/download/earthquakes1970-2014.json", function(res){
+        console.log(res)
+        var x
+        var datex = ""
+        var datexarray = []
         for(var i = 0; i<res.features.length; i++){
+          for(var z = 0; z<4; z++){
+            x=res.features[i].properties.DateTime[z]
+            y = x.toString()
+            datex +=y
+          }
+          datexarray.push(datex)
+          parseInt(datex)
+          if(datex < 1980){
+            // console.log("after 2000")
+           db1970.push({
+          "type": "Feature",
+          "geometry": {
+              "type": "Point",
+              "coordinates": res.features[i].geometry.coordinates
+            },
+          "properties": {
+              "title": "Mapbox DC",
+              "icon": "monument"
+            }
+          })
+        }
+          datex = ""
           db.push( 
          {
           "type": "Feature",
@@ -69,8 +119,6 @@
           }
         })
       }
-      console.log(db)
-    
 
       var nav = new mapboxgl.Navigation({position: 'top-left'}); // position is optional
       map.addControl(nav);
@@ -84,7 +132,6 @@
               "features": db
           }
         });
-
         map.addLayer({
           "id": "points",
           "type": "symbol",
@@ -93,13 +140,61 @@
               "icon-image": "{icon}-15",
               "text-field": "{title}",
               "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-              "text-color":"red",
               "text-offset": [0, 0.6],
               "text-anchor": "top"
           }
         });
       });
-    });
+
+
+            // "layers":[
+            //   {
+            //   "id":"1970plots",
+            //   "source": "mapbox-streets",
+            //   "source-layer": "water",
+            //   "type": "fill",
+            //   "paint": {
+            //     "fill-color": "#00ffff"
+            //     }
+            //   }
+            // ]
+
+            
+            map.addSource("1970plots", {
+              "type": "geojson",
+              "data": {
+                "type": "FeatureCollection",
+                "features": db1970,
+                "geojason-lines":{
+                  "type": "geojason",
+                  "data": "./lines.geojason"
+                  }
+                }
+              });
+
+            map.addLayer({
+            "id": "1970plots", 
+            "type": "symbol",
+            "source": "1970plots",
+            "layout": {
+                "icon-image": "{icon}-15",
+                "text-field": "{title}",
+                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+                "text-offset": [0, 0.6],
+                "text-anchor": "top"
+              }
+            });
+         })
+
+    
+     $('#70').click(function (e) {
+            // alert('Hello world')
+            map.removeLayer("points")
+            var features = map.queryRenderedFeatures(e.point, {layers:['1970plots']});
+            if(!features.length){
+              return;
+            }
+          });
     </script>
 
     </div>
