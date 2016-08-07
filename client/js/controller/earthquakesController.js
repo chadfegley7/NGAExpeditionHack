@@ -4,8 +4,8 @@ myApp.controller('earthquakesController', function($scope, earthquakeFactory){
   })
 
   earthquakeFactory.quakeDataApi(function(quakeData){
-    $scope.quakeData = quakeData.features.properties;
-    console.log($scope.quakeData);
-    console.log("Hello!")
+    $scope.quakeData = quakeData.features;
+    console.log(quakeData);
+    console.log($scope);
   })
 })

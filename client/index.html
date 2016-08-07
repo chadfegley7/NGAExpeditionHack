@@ -137,5 +137,12 @@
       // map.addControl(new mapboxgl.Geolocate({position: 'top-left'}));
       </script>
     </div>
+    <div ng-controller="earthquakesController">
+      <li ng-repeat="quake in quakeData">
+        <div ng-repeat="q in quake">
+          {{ q.coordinates }}
+        </div>
+      </li>
+    </div>
   </body>
 </html>
