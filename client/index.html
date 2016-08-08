@@ -1,97 +1,91 @@
 <!DOCTYPE html>
-
+<html>
   <head>
     <meta charset="utf-8">
-    <title>NGAExpedition Hackathon</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <title>Earthquake Visualizer</title>
+    <!-- Script tags -->
     <script src='https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.js'></script>
-    <script type="text/javascript" src="./js/config/routes.js"></script>
-    <script type="text/javascript" src="./js/controller/earthquakesController.js"></script>
-    <!-- <script type="text/javascript" src="./js/controller/gridController.js"></script> -->
-    <script type="text/javascript" src="./js/model/earthquakeFactory.js"></script>
-    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
-
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.0/jquery-ui.js"></script>
     <!-- Stylesheets -->
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.0/themes/base/jquery-ui.css">
     <link href="https://api.mapbox.com/mapbox-gl-js/v0.21.0/mapbox-gl.css' rel='stylesheet" />
     <link rel="stylesheet" type="text/css" href="style.css" />
-
   </head>
   <body>
     <div id='map'></div>
     <div id = "info">
-      <h1 id = "mainTitle">Earthquake Visualizer</h1>
-      <div id = "options">
-        <div id = "frontLeft">
-          <h2 class="earthquakeHeader">Earthquake 1-on-1</h2>
-          <p class="earthInfo">
-            Earthquakes are happening all over the world at a rate of 35 a day, or 12,000 - 14,000 a year.
-            So with all that activity you can only imagine the mounds of data to go through to get what you want, even just to sit there are read it would be a daunting task.
-            Why not make the information the world is providing us everyday and make it more engaging and user friendly?
-            That's our mission with Shake Quake, to make data fun.<br />
-            So you want to know some more basic information about earthquakes?<br /></p>
-            <h4 class="fourHeaders">Measurements</h4>
-            <p class="earthInfo">
-            We measure earthquakes by its Magnitude. A magnitude 6.0 earthquake releases 32 times more energy than a magnitude 5.0 and nearly 1,000 times more than a 4.0.
-            </p>
-            <h4 class="fourHeaders">Packing a Punch</h4>
-            <p class="earthInfo">
-              Going back to our 6.0 magnitude example, the amount of power that is released is approximately as much energy as 6,270 tons of TNT. A magnitude 7.0 releases 199,000 tons, and a magnitude 8.0 can do shattering damage while releasing 6.27 millions tons of TNT.
-            </p>
-            <h4 class="fourHeaders">What's the Cause?</h4>
-            <p class="earthInfo">
-              Earthquakes occur when the two sides of a fault slip suddenly against each other. The friction between plates causes stress, which is released when the blocks of crust slip sudenly along a fault plane. That releases waves of energy that travel through the ground.
-            </p>
+    <h1 id = "mainTitle">Earthquake Visualizer</h1>
+    <div id = "options">
+      <div id = "frontLeft">
+        <h2 class="earthquakeHeader">Earthquake 1-on-1</h2>
+        <p class="earthInfo">
+          Earthquakes are happening all over the world at a rate of 35 a day, or 12,000 - 14,000 a year.
+          So with all that activity you can only imagine the mounds of data to go through to get what you want, even just to sit there are read it would be a daunting task.
+          Why not make the information the world is providing us everyday and make it more engaging and user friendly?
+          That's our mission with Shake Quake, to make data fun.<br />
+          So you want to know some more basic information about earthquakes?
+          <br />
+        </p>
+        <h4 class="fourHeaders">Measurements</h4>
+        <p class="earthInfo">
+          We measure earthquakes by its Magnitude. A magnitude 6.0 earthquake releases 32 times more energy than a magnitude 5.0 and nearly 1,000 times more than a 4.0.
+        </p>
+        <h4 class="fourHeaders">Packing a Punch</h4>
+        <p class="earthInfo">
+          Going back to our 6.0 magnitude example, the amount of power that is released is approximately as much energy as 6,270 tons of TNT. A magnitude 7.0 releases 199,000 tons, and a magnitude 8.0 can do shattering damage while releasing 6.27 millions tons of TNT.
+        </p>
+        <h4 class="fourHeaders">What's the Cause?</h4>
+        <p class="earthInfo">
+         Earthquakes occur when the two sides of a fault slip suddenly against each other. The friction between plates causes stress, which is released when the blocks of crust slip sudenly along a fault plane. That releases waves of energy that travel through the ground.
+        </p>
+      </div>
+      <div id = "frontRight">
+        <div id="decSec">
+          <p>Select Decade:</p>
+          <button class="circle" id="70">1970</button>
+          <button class="circle" id="80">1980</button>
+          <button class="circle" id="90">1990</button>
+          <button class="circle" id="00">2000</button>
+          <button class="circle" id="10">2010</button>
         </div>
-        <div id = "frontRight">
-          <div id="decSec">
-            <p>Select Decade:</p>
-              <button class="circle" id="70">1970</button>
-              <button class="circle" id="80">1980</button>
-              <button class="circle" id="90">1990</button>
-              <button class="circle" id="00">2000</button>
-              <button class="circle" id="10">2010</button>
-          </div>
-          <div id="mgSec">
-            <label for="magni">Select Magnitude:</label>
-            <input type="text" id="magni" readonly>
-            <br>
-            <div id="slider-range"></div>
-
-
-          </div>
+        <div id="mgSec">
+          <label for="magni">Select Magnitude:</label>
+          <input type="text" id="magni" readonly>
+          <br>
+          <div id="slider-range"></div>
         </div>
       </div>
     </div>
-
+    </div>
     <script>
-
-
-    $( function() {
-    $( "#slider-range" ).slider({
-      range: true,
-      min: 1.0,
-      max: 10.0,
-      step: 0.1,
-      values: [ 1.0, 10.0 ],
-      slide: function( event, ui ) {
-        $("#magni").val(ui.values[0] + " - " + ui.values[1] );
-      }
-    })
-    $("#magni").val($("#slider-range").slider( "values", 0 ) +
-      " - " + $("#slider-range").slider("values", 1) );
-    } );
-
-
-      mapboxgl.accessToken ="" ;
-      var map = new mapboxgl.Map({
-          container: 'map',
-          style: 'mapbox://styles/mapbox/satellite-streets-v9',
-          zoom: 1,
-          hash: true
+      // Slider functionality
+      $(function() {
+        $("#slider-range").slider({
+          range: true,
+          min: 1.0,
+          max: 10.0,
+          step: 0.1,
+          values: [ 1.0, 10.0 ],
+          slide: function(event, ui) {
+            $("#magni").val(ui.values[0] + " - " + ui.values[1]);
+          }
+        })
+        $("#magni").val($("#slider-range").slider( "values", 0 ) + " - " + $("#slider-range").slider("values", 1) );
       });
 
+      /*
+        MapBox GL
+      */
+      mapboxgl.accessToken ="" ;
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/satellite-streets-v9',
+        zoom: 1,
+        hash: true
+      });
+
+      // Data structures for years
       var db = []
       var db1970 = []
       var db1980 = []
@@ -100,12 +94,13 @@
       var db2010 = []
 
       $.get("https://data.humdata.org/dataset/4881d82b-ba63-4515-b748-c364f3d05b42/resource/e5722a70-d599-47b9-b7b8-17ed63107076/download/earthquakes1970-2014.json", function(res){
-        console.log(res)
-        var x
-        var datex = ""
-        var datexarray = []
-        for(var i = 0; i<res.features.length; i++){
 
+        var x;
+        var datex = "";
+        var datexarray = [];
+
+        // Saving info by year
+        for(var i = 0; i<res.features.length; i++){
           for(var z = 0; z<4; z++){
             x=res.features[i].properties.DateTime[z]
             y = x.toString()
@@ -114,556 +109,463 @@
           datexarray.push(datex)
           parseInt(datex)
           if(datex < 1980){
-             db1970.push( 
-                {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": res.features[i].geometry.coordinates
-                  },
-                "properties": {
-                    "title": res.features[i].properties.Magnitude,
-
-                    "icon": "triangle",
-                    "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
-                    "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
-
-                    "icon": "triangle"
-                  }
-                })
-              }
-          if(datex < 1990 && datex > 1979){
-            // console.log("after 2000")
-           db1980.push( 
-                {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": res.features[i].geometry.coordinates
-                  },
-                "properties": {
-                    "title": res.features[i].properties.Magnitude,
-
-                    "icon": "triangle",
-                    "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
-                    "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
-
-                    "icon": "triangle"
-                  }
-                })
-          }
-          if(datex < 2000 && datex > 1989){
-            // console.log("after 2000")
-           db1990.push( 
-                {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": res.features[i].geometry.coordinates
-                  },
-                "properties": {
-                    "title": res.features[i].properties.Magnitude,
-
-                    "icon": "triangle",
-                    "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
-                    "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
-
-                    "icon": "triangle"
-                  }
-                })
-            }
-
-          if(datex > 1999 && datex < 2001){
-            // console.log("after 2000")
-           db2000.push( 
-                {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": res.features[i].geometry.coordinates
-                  },
-                "properties": {
-                    "title": res.features[i].properties.Magnitude,
-
-                    "icon": "triangle",
-                    "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
-                    "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
-
-                    "icon": "triangle"
-                  }
-                })
-            }
-
-          if(datex > 2000){
-            // console.log("after 2000")
-           db2010.push( 
-                {
-                "type": "Feature",
-                "geometry": {
-                    "type": "Point",
-                    "coordinates": res.features[i].geometry.coordinates
-                  },
-                "properties": {
-                    "title": res.features[i].properties.Magnitude,
-
-                    "icon": "triangle",
-                    "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
-                    "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
-
-                    "icon": "triangle"
-                  }
-                })
-            }        
-          datex = ""
-          db.push( 
-           {
-            "type": "Feature",
-            "geometry": {
+            db1970.push( 
+            {
+              "type": "Feature",
+              "geometry": {
                 "type": "Point",
                 "coordinates": res.features[i].geometry.coordinates
-            },
-            "properties": {
+              },
+              "properties": {
                 "title": res.features[i].properties.Magnitude,
-
-
+                "icon": "triangle",
+                "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+                "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude              
+              }
+            })
+          }
+          if(datex < 1990 && datex > 1979){
+            db1980.push( 
+            {
+              "type": "Feature",
+              "geometry": {
+                "type": "Point",
+                "coordinates": res.features[i].geometry.coordinates
+              },
+              "properties": {
+                "title": res.features[i].properties.Magnitude,
+                "icon": "triangle",
+                "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+                "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude
+              }
+            })
+          }
+          if(datex < 2000 && datex > 1989){
+            db1990.push( 
+            {
+              "type": "Feature",
+              "geometry": {
+                "type": "Point",
+                "coordinates": res.features[i].geometry.coordinates
+              },
+              "properties": {
+                "title": res.features[i].properties.Magnitude,
                 "icon": "triangle",
                 "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
                 "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude,
+              }
+            })
+          }
+          if(datex > 1999 && datex < 2001){
+            db2000.push(
+            {
+              "type": "Feature",
+              "geometry": {
+                "type": "Point",
+                "coordinates": res.features[i].geometry.coordinates
+              },
+              "properties": {
+                "title": res.features[i].properties.Magnitude,
 
-                "icon": "triangle"
+                "icon": "triangle",
+                "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+                "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude
+              }
+            })
+          }
 
+          if(datex > 2000){
+            db2010.push( 
+            {
+              "type": "Feature",
+              "geometry": {
+                "type": "Point",
+                "coordinates": res.features[i].geometry.coordinates
+              },
+              "properties": {
+                "title": res.features[i].properties.Magnitude,
+                "icon": "triangle",
+                "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+                "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude
+              }
+            })
+          }        
+          datex = ""
+          db.push( 
+            {
+              "type": "Feature",
+              "geometry": {
+              "type": "Point",
+              "coordinates": res.features[i].geometry.coordinates
+            },
+              "properties": {
+              "title": res.features[i].properties.Magnitude,
+              "icon": "triangle",
+              "description": new Date(res.features[i].properties.DateTime) + "<br />" +  "Mag Type: " + res.features[i].properties.MagType + "<br />" + "Depth: " + res.features[i].properties.Depth + "/km" + "<br />" +
+              "Latitude: " + res.features[i].properties.Latitude + "<br />" + "Longitude: " +  res.features[i].properties.Longitude
             }
           })
         }
-      })
-
-
-      var nav = new mapboxgl.Navigation({position: 'top-left'}); // position is optional
+      }); 
+      var nav = new mapboxgl.Navigation({position: 'top-left'}); 
       map.addControl(nav);
       map.on('load', function () {
         map.addSource("points", {
           "type": "geojson",
           "data": {
-              "type": "FeatureCollection",
-              "features": db
+            "type": "FeatureCollection",
+            "features": db
           }
         });
         map.addLayer({
-          "id": "points",
-          "type": "symbol",
-          "source": "points",
-          "layout": {
-              "icon-image": "{icon}-15",
-              "text-field": "{title}",
-              "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-              "text-offset": [0, 0.6],
-              "text-anchor": "top"
-          }
+        "id": "points",
+        "type": "symbol",
+        "source": "points",
+        "layout": {
+        "icon-image": "{icon}-15",
+        "text-field": "{title}",
+        "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+        "text-offset": [0, 0.6],
+        "text-anchor": "top"
+        }
         });
-
       });
+      $('#70').click(function (e) {
+        if(map.getLayer("points")){
+          map.removeLayer("points")
+          console.log("70")
+        } 
+        if(map.getLayer("1980plots")){
+          map.removeLayer("1980plots")
+        }
+        if(map.getLayer("1990plots")){
+          map.removeLayer("1990plots")
+        }
+        if(map.getLayer("2000plots")){
+          map.removeLayer("2000plots")
+        }
+        if(map.getLayer("2010plots")){
+          map.removeLayer("2010plots")
+        }
+        map.addSource("1970plots", {
+          "type": "geojson",
+          "data": {
+          "type": "FeatureCollection",
+          "features": db1970,
+          "geojason-lines":{
+            "type": "geojason",
+            "data": "./lines.geojason"
+            }
+          }
+        });
 
+        map.addLayer(
+        {
+        "id": "1970plots",
+        "type": "symbol",
+        "source": "1970plots",
+        "layout": {
+          "icon-image": "{icon}-15",
+          "text-field": "{title}",
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-offset": [0, 0.6],
+          "text-anchor": "top"
+          }
+        });
+        var features = map.queryRenderedFeatures(e.point, {layers:['1970plots']});
+          if(!features.length){
+            return;
+          }
+        map.on('click', function (e) {
+          var features = map.queryRenderedFeatures(e.point, { layers: ['1970plots'] });
 
-     $('#70').click(function (e) {
-            if(map.getLayer("points")){
-              map.removeLayer("points")
-              console.log("70")
-            }
-            if(map.getLayer("1980plots")){
-              map.removeLayer("1980plots")
-            }
-            if(map.getLayer("1990plots")){
-              map.removeLayer("1990plots")
-            }
-            if(map.getLayer("2000plots")){
-              map.removeLayer("2000plots")
-            }
-            if(map.getLayer("2010plots")){
-              map.removeLayer("2010plots")
-            }
-            map.addSource("1970plots", {
-              "type": "geojson",
-              "data": {
-                "type": "FeatureCollection",
-                "features": db1970,
-                "geojason-lines":{
-                  "type": "geojason",
-                  "data": "./lines.geojason"
-                  }
-              }
-            });
+          if (!features.length) {
+            return;
+          }
+          var feature = features[0];
+          // Populate the popup and set its coordinates
+          // based on the feature found.
+          var popup = new mapboxgl.Popup()
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(feature.properties.description)
+          .addTo(map);
+        });
 
-            map.addLayer({
-            "id": "1970plots",
+        // Change the cursor style to 'pointer' to make all symbols clickable
+        map.on('mousemove', function (e) {
+          var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+          map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+        });
+      });
+      $('#80').click(function (e) {
+        if(map.getLayer("points")){
+        map.removeLayer("points")
+        }
+        if(map.getLayer("1970plots")){
+        map.removeLayer("1970plots")
+        }
+        if(map.getLayer("1990plots")){
+        map.removeLayer("1990plots")
+        }
+        if(map.getLayer("2000plots")){
+        map.removeLayer("2000plots")
+        }
+        if(map.getLayer("2010plots")){
+        map.removeLayer("2010plots")
+        }
+        if(map.getLayer("1980plots")){
+          map.addLayer({
+            "id": "points",
             "type": "symbol",
-            "source": "1970plots",
+            "source": "points",
             "layout": {
-                "icon-image": "{icon}-15",
-                "text-field": "{title}",
-                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                "text-offset": [0, 0.6],
-                "text-anchor": "top"
-              }
-            });
-            var features = map.queryRenderedFeatures(e.point, {layers:['1970plots']});
-            if(!features.length){
-              return;
-            }
-               map.on('click', function (e) {
-                var features = map.queryRenderedFeatures(e.point, { layers: ['1970plots'] });
-
-                if (!features.length) {
-                    return;
-                }
-
-                var feature = features[0];
-
-                // Populate the popup and set its coordinates
-                // based on the feature found.
-                var popup = new mapboxgl.Popup()
-                    .setLngLat(feature.geometry.coordinates)
-                    .setHTML(feature.properties.description)
-                    .addTo(map);
-                });
-
-                // Use the same approach as above to indicate that the symbols are clickable
-                // by changing the cursor style to 'pointer'.
-                map.on('mousemove', function (e) {
-                    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
-                    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-                });
-          });
-
-
-
-
-     $('#80').click(function (e) {
-            if(map.getLayer("points")){
-              map.removeLayer("points")
-            }
-            if(map.getLayer("1970plots")){
-              map.removeLayer("1970plots")
-            }
-            if(map.getLayer("1990plots")){
-              map.removeLayer("1990plots")
-            }
-            if(map.getLayer("2000plots")){
-              map.removeLayer("2000plots")
-            }
-            if(map.getLayer("2010plots")){
-              map.removeLayer("2010plots")
-            }
-            if(map.getLayer("1980plots")){
-
-        map.addLayer({
-          "id": "points",
-          "type": "symbol",
-          "source": "points",
-          "layout": {
               "icon-image": "{icon}-15",
               "text-field": "{title}",
               "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
               "text-offset": [0, 0.6],
               "text-anchor": "top"
+            }
+          });
+        }
+        map.addSource("1980plots", {
+          "type": "geojson",
+          "data": {
+            "type": "FeatureCollection",
+            "features": db1980,
+            "geojason-lines":{
+             "type": "geojason",
+             "data": "./lines.geojason"
+            }
+          }
+        })
+        map.addLayer({
+          "id": "1980plots",
+          "type": "symbol",
+          "source": "1980plots",
+          "layout": {
+            "icon-image": "{icon}-15",
+            "text-field": "{title}",
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0, 0.6],
+            "text-anchor": "top"
+            }
+        });
+        var features = map.queryRenderedFeatures(e.point, {layers:['1980plots']});
+        if(!features.length){
+          return;
+        }
+        map.on('click', function (e) {
+          var features = map.queryRenderedFeatures(e.point, { layers: ['1980plots'] });
+          if (!features.length) {
+            return;
+          }
+          var feature = features[0];
+
+          // Populate the popup and set its coordinates
+          // based on the feature found.
+          var popup = new mapboxgl.Popup()
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML(feature.properties.description)
+            .addTo(map);
+        });
+        map.on('mousemove', function (e) {
+          var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+          map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+        });            
+      });
+      $('#90').click(function (e) {
+        if(map.getLayer("points")){
+          map.removeLayer("points")
+        }
+        if(map.getLayer("1970plots")){
+          map.removeLayer("1970plots")
+        }
+        if(map.getLayer("1980plots")){
+         map.removeLayer("1980plots")
+        }
+        if(map.getLayer("2000plots")){
+          map.removeLayer("2000plots")
+        }
+        if(map.getLayer("2010plots")){
+          map.removeLayer("2010plots")
+        }
+        map.addSource("1990plots", {
+        "type": "geojson",
+        "data": {
+        "type": "FeatureCollection",
+        "features": db1990,
+        "geojason-lines":{
+          "type": "geojason",
+          "data": "./lines.geojason"
+          }
+        }
+        });
+        map.addLayer({
+        "id": "1990plots",
+        "type": "symbol",
+        "source": "1990plots",
+        "layout": {
+          "icon-image": "{icon}-15",
+          "text-field": "{title}",
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-offset": [0, 0.6],
+          "text-anchor": "top"
           }
         });
+        var features = map.queryRenderedFeatures(e.point, {layers:['1990plots']});
+        if(!features.length){
+          return;
+        }
+        map.on('click', function (e) {
+          var features = map.queryRenderedFeatures(e.point, { layers: ['1990plots'] });
+          if (!features.length) {
+           return;
+          }
+          var feature = features[0];
+          var popup = new mapboxgl.Popup()
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(feature.properties.description)
+          .addTo(map);
+        });
+        map.on('mousemove', function (e) {
+          var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+          map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+        });              
+      });
+      $('#00').click(function (e) {
+        if(map.getLayer("points")){
+          map.removeLayer("points")
+        }
+        if(map.getLayer("1970plots")){
+          map.removeLayer("1970plots")
+        }
+        if(map.getLayer("1980plots")){
+          map.removeLayer("1980plots")
+        }
+        if(map.getLayer("1990plots")){
+          map.removeLayer("1990plots")
+        }
+        if(map.getLayer("2010plots")){
+          map.removeLayer("2010plots")
+        }
+        map.addSource("2000plots", {
+          "type": "geojson",
+          "data": {
+          "type": "FeatureCollection",
+          "features": db2000,
+          "geojason-lines":{
+            "type": "geojason",
+            "data": "./lines.geojason"
             }
-            map.addSource("1980plots", {
-              "type": "geojson",
-              "data": {
-                "type": "FeatureCollection",
-                "features": db1980,
-                "geojason-lines":{
-                  "type": "geojason",
-                  "data": "./lines.geojason"
-                  }
-                }
-              })
+          }
+        });
+        map.addLayer({
+          "id": "2000plots",
+          "type": "symbol",
+          "source": "2000plots",
+          "layout": {
+            "icon-image": "{icon}-15",
+            "text-field": "{title}",
+            "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+            "text-offset": [0, 0.6],
+            "text-anchor": "top"
+          }
+        })
+        var features = map.queryRenderedFeatures(e.point, {layers:['2000plots']});
+        if(!features.length){
+          return;
+        }
+        map.on('click', function (e) {
+          var features = map.queryRenderedFeatures(e.point, { layers: ['2000plots'] });
+          if (!features.length) {
+            return;
+          }
+          var feature = features[0];
+          var popup = new mapboxgl.Popup()
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML(feature.properties.description)
+            .addTo(map);
+        });
+        map.on('mousemove', function (e) {
+          var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+          map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+        });            
+      });
+      $('#10').click(function (e) {
+        if(map.getLayer("points")){
+          map.removeLayer("points")
+        }
+        if(map.getLayer("1970plots")){
+          map.removeLayer("1970plots")
+        }
+        if(map.getLayer("1980plots")){
+          map.removeLayer("1980plots")
+        }
+        if(map.getLayer("1990plots")){
+          map.removeLayer("1990plots")
+        }
+        if(map.getLayer("2000plots")){
+          map.removeLayer("2000plots")
+        }
+        map.addSource("2010plots", {
+          "type": "geojson",
+          "data": {
+          "type": "FeatureCollection",
+          "features": db2010,
+          "geojason-lines":{
+            "type": "geojason",
+            "data": "./lines.geojason"
+           }
+          }
+        });
+        map.addLayer({
+          "id": "2010plots",
+          "type": "symbol",
+          "source": "2010plots",
+          "layout": {
+          "icon-image": "{icon}-15",
+          "text-field": "{title}",
+          "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
+          "text-offset": [0, 0.6],
+          "text-anchor": "top"
+          }
+        });
+        var features = map.queryRenderedFeatures(e.point, {layers:['2010plots']});
+        if(!features.length){
+          return;
+        }
+        map.on('click', function (e) {
+          var features = map.queryRenderedFeatures(e.point, { layers: ['2010plots'] });
+          if (!features.length) {
+            return;
+          }
+          var feature = features[0];
+          var popup = new mapboxgl.Popup()
+            .setLngLat(feature.geometry.coordinates)
+            .setHTML(feature.properties.description)
+            .addTo(map);
+        });
+        map.on('mousemove', function (e) {
+          var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
+          map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
+        });            
+      });
+      map.on('click', function (e) {
+        var features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
+        if (!features.length) {
+          return;
+        }
 
-
-            map.addLayer({
-            "id": "1980plots",
-            "type": "symbol",
-            "source": "1980plots",
-            "layout": {
-                "icon-image": "{icon}-15",
-                "text-field": "{title}",
-                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                "text-offset": [0, 0.6],
-                "text-anchor": "top"
-              }
-            });
-            var features = map.queryRenderedFeatures(e.point, {layers:['1980plots']});
-            if(!features.length){
-              return;
-            }
-               map.on('click', function (e) {
-                var features = map.queryRenderedFeatures(e.point, { layers: ['1980plots'] });
-
-                if (!features.length) {
-                    return;
-                }
-
-                var feature = features[0];
-
-                // Populate the popup and set its coordinates
-                // based on the feature found.
-                var popup = new mapboxgl.Popup()
-                    .setLngLat(feature.geometry.coordinates)
-                    .setHTML(feature.properties.description)
-                    .addTo(map);
-                });
-
-                // Use the same approach as above to indicate that the symbols are clickable
-                // by changing the cursor style to 'pointer'.
-                map.on('mousemove', function (e) {
-                    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
-                    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-                });            
-          });
-
-
-
-     $('#90').click(function (e) {
-            if(map.getLayer("points")){
-              map.removeLayer("points")
-            }
-            if(map.getLayer("1970plots")){
-              map.removeLayer("1970plots")
-            }
-            if(map.getLayer("1980plots")){
-              map.removeLayer("1980plots")
-            }
-            if(map.getLayer("2000plots")){
-              map.removeLayer("2000plots")
-            }
-            if(map.getLayer("2010plots")){
-              map.removeLayer("2010plots")
-            }
-              map.addSource("1990plots", {
-              "type": "geojson",
-              "data": {
-                "type": "FeatureCollection",
-                "features": db1990,
-                "geojason-lines":{
-                  "type": "geojason",
-                  "data": "./lines.geojason"
-                  }
-                }
-              });
-
-            map.addLayer({
-            "id": "1990plots",
-            "type": "symbol",
-            "source": "1990plots",
-            "layout": {
-                "icon-image": "{icon}-15",
-                "text-field": "{title}",
-                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                "text-offset": [0, 0.6],
-                "text-anchor": "top"
-              }
-            });
-            var features = map.queryRenderedFeatures(e.point, {layers:['1990plots']});
-            if(!features.length){
-              return;
-            }
-               map.on('click', function (e) {
-                var features = map.queryRenderedFeatures(e.point, { layers: ['1990plots'] });
-
-                if (!features.length) {
-                    return;
-                }
-
-                var feature = features[0];
-
-                // Populate the popup and set its coordinates
-                // based on the feature found.
-                var popup = new mapboxgl.Popup()
-                    .setLngLat(feature.geometry.coordinates)
-                    .setHTML(feature.properties.description)
-                    .addTo(map);
-                });
-
-                // Use the same approach as above to indicate that the symbols are clickable
-                // by changing the cursor style to 'pointer'.
-                map.on('mousemove', function (e) {
-                    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
-                    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-                });              
-          });
-
-
-
-     $('#00').click(function (e) {
-            if(map.getLayer("points")){
-              map.removeLayer("points")
-            }
-            if(map.getLayer("1970plots")){
-              map.removeLayer("1970plots")
-            }
-            if(map.getLayer("1980plots")){
-              map.removeLayer("1980plots")
-            }
-            if(map.getLayer("1990plots")){
-              map.removeLayer("1990plots")
-            }
-            if(map.getLayer("2010plots")){
-              map.removeLayer("2010plots")
-            }
-              map.addSource("2000plots", {
-              "type": "geojson",
-              "data": {
-                "type": "FeatureCollection",
-                "features": db2000,
-                "geojason-lines":{
-                  "type": "geojason",
-                  "data": "./lines.geojason"
-                  }
-                }
-              });
-
-            map.addLayer({
-            "id": "2000plots",
-            "type": "symbol",
-            "source": "2000plots",
-            "layout": {
-                "icon-image": "{icon}-15",
-                "text-field": "{title}",
-                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                "text-offset": [0, 0.6],
-                "text-anchor": "top"
-              }
-            })
-            var features = map.queryRenderedFeatures(e.point, {layers:['2000plots']});
-            if(!features.length){
-              return;
-            }
-               map.on('click', function (e) {
-                var features = map.queryRenderedFeatures(e.point, { layers: ['2000plots'] });
-
-                if (!features.length) {
-                    return;
-                }
-
-                var feature = features[0];
-
-                // Populate the popup and set its coordinates
-                // based on the feature found.
-                var popup = new mapboxgl.Popup()
-                    .setLngLat(feature.geometry.coordinates)
-                    .setHTML(feature.properties.description)
-                    .addTo(map);
-                });
-
-                // Use the same approach as above to indicate that the symbols are clickable
-                // by changing the cursor style to 'pointer'.
-                map.on('mousemove', function (e) {
-                    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
-                    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-                });            
-          });
-
-
-
-     $('#10').click(function (e) {
-            if(map.getLayer("points")){
-              map.removeLayer("points")
-            }
-            if(map.getLayer("1970plots")){
-              map.removeLayer("1970plots")
-            }
-            if(map.getLayer("1980plots")){
-              map.removeLayer("1980plots")
-            }
-            if(map.getLayer("1990plots")){
-              map.removeLayer("1990plots")
-            }
-            if(map.getLayer("2000plots")){
-              map.removeLayer("2000plots")
-            }
-            map.addSource("2010plots", {
-              "type": "geojson",
-              "data": {
-                "type": "FeatureCollection",
-                "features": db2010,
-                "geojason-lines":{
-                  "type": "geojason",
-                  "data": "./lines.geojason"
-                 }
-                }
-              });
-
-            map.addLayer({
-            "id": "2010plots",
-            "type": "symbol",
-            "source": "2010plots",
-            "layout": {
-                "icon-image": "{icon}-15",
-                "text-field": "{title}",
-                "text-font": ["Open Sans Semibold", "Arial Unicode MS Bold"],
-                "text-offset": [0, 0.6],
-                "text-anchor": "top"
-              }
-
-            });
-
-            var features = map.queryRenderedFeatures(e.point, {layers:['2010plots']});
-            if(!features.length){
-              return;
-            }
-               map.on('click', function (e) {
-                var features = map.queryRenderedFeatures(e.point, { layers: ['2010plots'] });
-                if (!features.length) {
-                    return;
-                }
-                var feature = features[0];
-                var popup = new mapboxgl.Popup()
-                    .setLngLat(feature.geometry.coordinates)
-                    .setHTML(feature.properties.description)
-                    .addTo(map);
-                });
-                map.on('mousemove', function (e) {
-                    var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
-                    map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-                });            
-
-
-          });
-
-
-
-
-    map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point, { layers: ['points'] });
-
-    if (!features.length) {
-        return;
-    }
-
-    var feature = features[0];
-
-    // Populate the popup and set its coordinates
-    // based on the feature found.
-    var popup = new mapboxgl.Popup()
-        .setLngLat(feature.geometry.coordinates)
-        .setHTML(feature.properties.description)
-        .addTo(map);
-    });
-
-    // Use the same approach as above to indicate that the symbols are clickable
-    // by changing the cursor style to 'pointer'.
-    map.on('mousemove', function (e) {
+        var feature = features[0];
+        var popup = new mapboxgl.Popup()
+          .setLngLat(feature.geometry.coordinates)
+          .setHTML(feature.properties.description)
+          .addTo(map);
+      });
+      map.on('mousemove', function (e) {
         var features = map.queryRenderedFeatures(e.point, { layers: ['places'] });
         map.getCanvas().style.cursor = (features.length) ? 'pointer' : '';
-    });
-
-
-
+      });
     </script>
-
-    </div>
-
-
   </body>
 </html>
